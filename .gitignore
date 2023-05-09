@@ -1,0 +1,9 @@
+
+.idea/*
+**/.idea
+**/*log.*
+*.tex
+*.ipynb
+*.pdf
+*prelim/*
+*.pptx
