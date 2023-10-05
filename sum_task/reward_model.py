@@ -153,7 +153,7 @@ class RewardModelTrainer(object):
         self.rew_num_train_epochs = args.rew_num_train_epochs
         self.rew_eval_period = max(ceil(args.rew_eval_period * self.num_updates_per_epoch), 1)
         self.num_valid_batch = max(int(0.2 * len(rew_eval_dataloader)), 1)
-        # use 20% of the `rew_eval_dataloader` to compute the validation loss
+        # use 20% of the `rew_eval_dataloader` to compute the validation loss (which saves time)
 
         ######## Training Setups ########
         self.optimizer = optim.Adam(self.module.parameters(), lr=self.rew_learning_rate)

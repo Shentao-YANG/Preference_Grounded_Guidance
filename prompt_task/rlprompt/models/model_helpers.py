@@ -23,7 +23,7 @@ def make_single_prompt_model(model: BaseModel,
 
 
 def make_reward_model(config: "DictConfig") -> RewardModel:
-    # use the same language-model and hidden size as the policy model
+    # use the same language model and hidden size as the policy model
     return RewardModel(
         config.policy_lm,
         config.hidden_size,
@@ -40,8 +40,7 @@ class LMAdaptorModelConfig:
     logit_bias: float = 0.0
     # Added to all prompt token logits. Set negative value to encourage exploration.
     fluent: bool = False
-    # if True, constrain tokens to be from those with top-k probability under
-    # a GPT-2 model
+    # if True, constrain tokens to be from those with top-k probability under a GPT-2 model
     fluent_top_k: int = 20
     # k for top-k probability above
     max_decoding_length: int = 5
@@ -57,4 +56,4 @@ class SinglePromptModelConfig:
     prompt_infer_batch_size: int = 8
     source_str: str = "<|endoftext|>"
     # reward model
-    use_softplus: int = 0   # default: do not use softplus, use sigmoid
+    use_softplus: int = 1           # default: use softplus, set to `0` to use sigmoid

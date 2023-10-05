@@ -4,6 +4,7 @@ import numpy as np
 import random
 from typing import Callable
 
+
 def get_default_train_op(model: nn.Module,
                          learning_rate: float,
                          gradient_clip: bool,

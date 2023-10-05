@@ -3,7 +3,7 @@ import sys
 sys.path.append("..")
 import os
 from os.path import dirname
-sys.path.append(dirname(dirname(dirname(os.path.dirname(os.path.abspath("__file__"))))))
+sys.path.append(dirname(dirname(dirname(dirname(os.path.abspath("__file__"))))))
 from omegaconf import OmegaConf
 from torch.utils.data import DataLoader
 

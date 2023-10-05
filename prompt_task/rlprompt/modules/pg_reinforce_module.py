@@ -47,9 +47,9 @@ class ReinforceModule(BaseModule):
 
         self.nll_loss_fct = torch.nn.CrossEntropyLoss(reduction='none')
 
-        if use_q_for_weight == 1:   # use q for weight
+        if use_q_for_weight == 1:   # use Q(s,a) for weight
             self.rew_to_weight_func = reward_to_Q_value
-        else:   # use r for weight
+        else:   # use r(s,a) for weight
             self.rew_to_weight_func = reward_to_reward
 
         print(f"\nUse ReinforceModule for Policy Training !!! max_entropy_coeff={self.max_entropy_coeff}, "

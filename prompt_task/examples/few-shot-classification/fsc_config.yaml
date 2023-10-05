@@ -13,7 +13,7 @@ task_lm: "roberta-large"
 prompt_length: 5
 prompt_train_batch_size: 16
 prompt_infer_batch_size: 1
-# SQL Module
+# top-k sampling Module
 top_k: 256
 # Trainer
 max_train_steps: 12000
@@ -22,7 +22,7 @@ eval_steps: 10
 save_steps: 12000
 learning_rate: 5e-5
 random_seed: 0
-output_folder: "./outputs/Exp1/sst-2/rs0ds0"         # "./outputs/Exp${EXP_IDX}/${DATASET}/rs${random_seed}ds${dataset_seed}"
+output_folder: "./outputs/Exp1/sst-2/rs0ds0"         # Need to change accordingly. Format: "./outputs/Exp${EXP_IDX}/${DATASET}/rs${random_seed}ds${dataset_seed}"
 # Reward function learning
 reward_learning_samples: 5
 reward_learning_batch_size: 64
@@ -30,7 +30,7 @@ rew_gradient_accumulation_steps: 1
 rew_num_train_epochs: 100
 rew_max_train_steps: 10000
 agg_func: "sum"
-soft_maxmin_temp: 1.
+soft_maxmin_temp: 2.
 compute_rew_batch_mode: 1
 rew_learning_rate: 5e-5
 # Policy-reward joint learning
@@ -39,6 +39,6 @@ early_stop_eval_period: 500
 num_validation_prompts: 15
 # REINFORCE param
 max_entropy_coeff: 0.125
-use_q_for_weight: 0       # default: do not use q for weight -> use r for weight
+use_q_for_weight: 0       # default: do not use q for weight -> use r(s,a) for weight
 # reward model param
-use_softplus: 1           # default: do not use softplus, use sigmoid
+use_softplus: 1           # default: use softplus, set to `0` to use sigmoid

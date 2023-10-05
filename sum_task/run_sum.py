@@ -77,7 +77,7 @@ def main():
     generate_with_grad = undecorated(model.generate)
     model.generate_with_grad = MethodType(generate_with_grad, model)
 
-    metric = evaluate.load("rouge")
+    metric = evaluate.load("rouge")     # metric for simulating the seq-level preference
 
     prefix = args.source_prefix if args.source_prefix is not None else ""
     column_names, text_column, summary_column, raw_datasets = preprocessing_raw_dataset(args, raw_datasets)
@@ -130,6 +130,7 @@ def main():
     )
     eval_dataloader = DataLoader(eval_dataset, shuffle=True, collate_fn=data_collator, batch_size=args.per_device_eval_batch_size)
     test_dataloader = DataLoader(test_dataset, collate_fn=data_collator, batch_size=args.per_device_eval_batch_size)
+    # data loaders for training the reward function
     rew_train_dataloader = DataLoader(
         train_dataset, shuffle=True, collate_fn=data_collator, batch_size=args.reward_learning_batch_size
     )
@@ -154,7 +155,7 @@ def main():
         "num_beams": args.num_beams,
     }
 
-    # create a new metric object
+    # create a new metric object for final evaluation
     metric = evaluate.load("rouge")
 
     def get_evaluation_results(dataloader):

@@ -44,11 +44,14 @@ def add_prefix_to_dict_keys_inplace(
         new_key = f"{prefix}{key}"
         d[new_key] = d.pop(key)
 
+
 def colorful_print(string: str, *args, **kwargs) -> None:
     print(click.style(string, *args, **kwargs))
 
+
 def colorful_warning(string: str, *args, **kwargs) -> None:
     warnings.warn(click.style(string, *args, **kwargs))
+
 
 def unionize_dicts(dicts: List[Dict]) -> Dict:
     union_dict: Dict = {}

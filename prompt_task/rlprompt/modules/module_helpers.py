@@ -25,5 +25,5 @@ class SQLModuleConfig:
 @dataclass
 class ReinforceModuleConfig:
     num_reinforce_samples: int = 64
-    max_entropy_coeff: float = 0.1
-    use_q_for_weight: int = 0       # default: do not use q for weight -> use r for weight
+    max_entropy_coeff: float = 0.125
+    use_q_for_weight: int = 0       # default: do not use q for weight -> use r(s,a) for weight

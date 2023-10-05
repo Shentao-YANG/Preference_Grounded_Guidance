@@ -252,7 +252,7 @@ class RewardPolicyTrainer:
                 break
 
             # 1 <= total_steps <= self.max_train_steps
-            # early stopping
+            # early stopping callbacks
             if total_steps % self.early_stop_eval_period == 0:
                 # don't save the prompts generated at the validation process
                 if total_steps == self.max_train_steps:

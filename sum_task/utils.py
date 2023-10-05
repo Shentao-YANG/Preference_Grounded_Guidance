@@ -8,6 +8,7 @@ import nltk
 import numpy as np
 from transformers import AutoConfig
 
+
 def set_random_seed(seed):
     random.seed(seed)
     np.random.seed(seed)
@@ -104,11 +105,12 @@ def load_pretrained_model(args, loader, config, tokenizer, reward_model=False):
     prints(f"Load model {'REWARD' if reward_model else 'POLICY'}: {args.rew_model_name_or_path if reward_model else args.model_name_or_path}", warning=True)
 
     config = AutoConfig.from_pretrained(args.rew_model_name_or_path) if reward_model else config
+    # in case reward model is different from the LM (e.g., T5-small v.s. T5-base)
 
     if args.model_name_or_path or args.rew_model_name_or_path:
         model = loader.from_pretrained(
             args.rew_model_name_or_path if reward_model else args.model_name_or_path,
-            from_tf=bool(".ckpt" in args.model_name_or_path),
+            from_tf=bool(".ckpt" in args.model_name_or_path or ".ckpt" in args.rew_model_name_or_path),
             config=config,
         )
     else:

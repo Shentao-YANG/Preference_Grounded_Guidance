@@ -1,6 +1,6 @@
 import os, sys
 from os.path import dirname
-sys.path.append(dirname(dirname(os.path.dirname(os.path.abspath("__file__")))))
+sys.path.append(dirname(dirname(dirname(os.path.abspath("__file__")))))
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1'
 import torch

@@ -28,7 +28,8 @@ def parse_args():
         "--validation_file", type=str, default=None, help="A csv or a json file containing the validation data."
     )
     parser.add_argument(
-        "--test_file", type=str, default=None, help="An optional input test data file to evaluate the metrics (rouge) on (a jsonlines or csv file)."
+        "--test_file", type=str, default=None,
+        help="An optional input test data file to evaluate the metrics (rouge, meteor, ...) on (a jsonlines or csv file)."
     )
     parser.add_argument(
         "--ignore_pad_token_for_loss",
@@ -41,8 +42,8 @@ def parse_args():
         type=int,
         default=1024,
         help=(
-            "The maximum total input sequence length after "
-            "tokenization.Sequences longer than this will be truncated, sequences shorter will be padded."
+            "The maximum total input sequence length after tokenization. "
+            "Sequences longer than this will be truncated, sequences shorter will be padded."
         ),
     )
     parser.add_argument(
@@ -65,9 +66,9 @@ def parse_args():
         type=int,
         default=128,
         help=(
-            "The maximum total sequence length for target text after "
-            "tokenization. Sequences longer than this will be truncated, sequences shorter will be padded."
-            "during ``evaluate`` and ``predict``."
+            "The maximum total sequence length for target text after tokenization. "
+            "Sequences longer than this will be truncated, sequences shorter will be padded."
+            "During ``evaluate`` and ``predict``."
         ),
     )
     parser.add_argument(
@@ -75,9 +76,9 @@ def parse_args():
         type=int,
         default=None,
         help=(
-            "The maximum total sequence length for validation "
-            "target text after tokenization.Sequences longer than this will be truncated, sequences shorter will be "
-            "padded. Will default to `max_target_length`.This argument is also used to override the ``max_length`` "
+            "The maximum total sequence length for validation target text after tokenization. "
+            "Sequences longer than this will be truncated, sequences shorter will be padded. "
+            "Will default to `max_target_length`. This argument is also used to override the ``max_length`` "
             "param of ``model.generate``, which is used during ``evaluate`` and ``predict``."
         ),
     )
@@ -188,7 +189,7 @@ def parse_args():
         help="Number of updates steps to accumulate before perform a backward/update pass.",
     )
     parser.add_argument("--output_dir", type=str, default=None, help="Where to store the final model.")
-    parser.add_argument("--seed", type=int, default=0, help="A seed for reproducible training.")
+    parser.add_argument("--seed", type=int, default=0, help="Random seed for reproducible training.")
     parser.add_argument(
         "--model_type", type=str, default=None,
         help="Model type to use if training from scratch.",
@@ -199,7 +200,8 @@ def parse_args():
         "--device", type=str,
         default=torch.device("cuda" if torch.cuda.is_available() else "cpu"), help="Device for model training"
     )
-    parser.add_argument("--use_softplus", type=int, default=1, help="Whether use `softplus` or `sigmoid` in the reward model")
+    parser.add_argument("--use_softplus", type=int, default=1,
+                        help="Whether use `softplus` or `sigmoid` in bounding the output of the reward model")
     parser.add_argument("--gradient_clip", type=int, default=1)
     parser.add_argument("--gradient_clip_norm", type=float, default=5.0)
     parser.add_argument("--rew_num_train_epochs", type=float, default=0.1)
@@ -217,17 +219,16 @@ def parse_args():
 
     parser.add_argument("--reward_learning_samples", type=int, default=3)
     parser.add_argument("--agg_func", type=str, default="avg")
-    parser.add_argument("--soft_maxmin_temp", type=float, default=1.)
-    parser.add_argument("--reinforce_coeff", type=float, default=-1.)
-    parser.add_argument("--max_entropy_coeff", type=float, default=-1.)
-    parser.add_argument("--use_q_for_weight", type=int, default=0)      # default: use r for weight
+    parser.add_argument("--soft_maxmin_temp", type=float, default=2.)
+    parser.add_argument("--reinforce_coeff", type=float, default=-1.)       # default: "-1" suppress this loss component
+    parser.add_argument("--max_entropy_coeff", type=float, default=-1.)     # default: "-1" suppress this loss component
+    parser.add_argument("--num_reinforce_samples", type=int, default=1)
+    parser.add_argument("--use_q_for_weight", type=int, default=0)      # default: use r(s,a) for weight
     parser.add_argument("--reward_retrain_period", type=float, default=0.5)
     parser.add_argument("--exp_in_wmle", type=int, default=0)
-    parser.add_argument("--weight_decay", type=float, default=0.0, help="Weight decay to use.")
+    parser.add_argument("--weight_decay", type=float, default=0.0, help="Weight decay to use in the optimizer.")
     parser.add_argument("--reset_optim", type=int, default=0)
-    parser.add_argument("--expid", type=str, default="1")
-
-    parser.add_argument("--num_reinforce_samples", type=int, default=1)
+    parser.add_argument("--expid", type=str, default="1", help="Experiment ID to organize results/logs.")
     ############################################################################################################
     args = parser.parse_args()
 
