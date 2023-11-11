@@ -1,16 +1,16 @@
 # Preference-grounded Token-level Guidance for Language Model Training
 
 Source codes for the main experiments in *Preference-grounded Token-level Guidance for Language Model Fine-tuning*.
-[[Paper]](https://arxiv.org/abs/2306.00398).
+[[Paper]](https://arxiv.org/abs/2306.00398), [[Poster]](https://github.com/Shentao-YANG/Preference_Grounded_Guidance/blob/main/NeurIPS_2023_tokel_level_reward_poster_40x60.pdf).
 
 Bibtex:
 ```angular2html
 @inproceedings{yang2023preferencegrounded,
-  title={Preference-grounded Token-level Guidance for Language Model Fine-tuning},
-  author={Shentao Yang and Shujian Zhang and Congying Xia and Yihao Feng and Caiming Xiong and Mingyuan Zhou},
-  booktitle={Advances in Neural Information Processing Systems},
-  year={2023},
-  url={https://arxiv.org/abs/2306.00398}
+    title={Preference-grounded Token-level Guidance for Language Model Fine-tuning},
+    author={Shentao Yang and Shujian Zhang and Congying Xia and Yihao Feng and Caiming Xiong and Mingyuan Zhou},
+    booktitle={Thirty-seventh Conference on Neural Information Processing Systems},
+    year={2023},
+    url={https://openreview.net/forum?id=6SRE9GZ9s6}
 }
 ```
 
