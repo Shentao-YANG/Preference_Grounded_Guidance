@@ -1,4 +1,4 @@
-# Preference-grounded Token-level Guidance for Language Model Training
+# Preference-grounded Token-level Guidance for Language Model Training [NeurIPS '23]
 
 Source codes for the main experiments in *Preference-grounded Token-level Guidance for Language Model Fine-tuning*.
 [[Paper]](https://arxiv.org/abs/2306.00398), [[Poster]](https://github.com/Shentao-YANG/Preference_Grounded_Guidance/blob/main/NeurIPS_2023_tokel_level_reward_poster_40x60.pdf).
@@ -10,9 +10,29 @@ Bibtex:
     author={Shentao Yang and Shujian Zhang and Congying Xia and Yihao Feng and Caiming Xiong and Mingyuan Zhou},
     booktitle={Thirty-seventh Conference on Neural Information Processing Systems},
     year={2023},
-    url={https://openreview.net/forum?id=6SRE9GZ9s6}
+    url={https://arxiv.org/pdf/2306.00398}
 }
 ```
+## Update (01/07/2025)
+In our follow-up work, we developed new techniques to successfully scale up the token-level RLHF framework in this paper/repo to PPO + LLMs.
+We again observed strong gain over the classical bandit RLHF.
+
+- $\small \textsf{The judge model is GPT-4o}$
+
+| Models                               |  AlpacaEval 2 (LC)  |  Arena-Hard   |  MT-Bench   |
+|--------------------------------------|:----------:|:-----:|:-----:|
+| ***Token PPO*** Llama-3.1 Instruct 8B |   45.81    | 49.3  | 7.93  |
+| Bandit PPO Llama-3.1 Instruct 8B     |   40.77    | 36.6  | 7.76  |
+| ***Token PPO*** Llama-3 SFT 8B         |   23.84    | 26.0  | 7.13  |
+| Bandit PPO Llama-3 SFT 8B            |   21.20    | 18.7  | 7.11  |
+
+Our follow-up work adopts the framework in this paper and addresses the over-granular issue of token-level RLHF.
+Our proposal is to ${\color{lightgreen} \textsf{assign reward to each semantically complete text segment}}$, rather than per-token.
+Details are available on:
+
+- ArXiv: [Segmenting Text and Learning Their Rewards for Improved RLHF in Language Model](https://arxiv.org/abs/2501.02790)
+
+- GitHub Repo and Model Releases: [DenseRewardRLHF-PPO](https://github.com/yinyueqin/DenseRewardRLHF-PPO)
 
 ## Dependency
 
